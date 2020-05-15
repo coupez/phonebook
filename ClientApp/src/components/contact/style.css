@@ -1,0 +1,44 @@
+:root {}
+
+.contact {
+    /* TODO: MOVE TO PARENT WITH REM: */
+    margin-bottom: 11px;
+    /* background: rgba(255,100,0,0.2); */
+}
+
+.contact .image {
+    width: 3.5rem;
+    height: 3.5rem;
+    background: #C4C4C4;
+    border-radius: 100%;
+}
+
+.contact .info {
+    margin: 0 0.8rem;
+    /* justify-content: center; */
+}
+
+.contact .name {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 0.9rem;
+    margin-top: 0.3rem;
+}
+
+.contact .number {
+    font-style: normal;
+    font-weight: 300;
+    font-size: 0.9rem;
+    line-height: 18px;
+}
+
+.contact .button {
+    font-weight: bold;
+    font-size: 0.9rem;
+    color: #D4DBFF;
+
+    padding: 0.5rem;
+    margin: 0;
+    background: none;
+    border: none;
+}
