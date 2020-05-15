@@ -1,7 +1,6 @@
-
-
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
+using phonebook.Models;
 using phonebook.Services;
 
 namespace phonebook.Controllers
@@ -17,9 +16,14 @@ namespace phonebook.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<Contact> Get()
+        public ActionResult<IEnumerable<Contact>> Get(string query)
         {
-            return contactService.Get();
+            return Ok(contactService.Get(query));
+        }
+
+        [HttpPost]
+        public ActionResult<Contact> Create(ContactDTO contact) {
+            return contactService.Add(contact.ToContact());
         }
     }
 }

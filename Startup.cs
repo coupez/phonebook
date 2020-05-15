@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Options;
+using phonebook.Models;
 using phonebook.Services;
 
 namespace phonebook
@@ -21,7 +23,10 @@ namespace phonebook
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddScoped<IContactService, ContactService>();
+            services.Configure<PhonebookDatabaseSettings>(Configuration.GetSection(nameof(PhonebookDatabaseSettings)));
+            services.AddSingleton<IPhonebookDatabaseSettings>(sp => sp.GetRequiredService<IOptions<PhonebookDatabaseSettings>>().Value);
+
+            services.AddSingleton<IContactService, ContactService>();
 
             services.AddControllersWithViews();
 

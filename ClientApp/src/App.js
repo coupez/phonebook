@@ -21,7 +21,7 @@ function App() {
                 <Contact
                   key={contact.id}
                   name={`${contact.firstName} ${contact.lastName}`}
-                  number={contact.phonenumber}
+                  number={contact.phoneNumber}
                 />
               ))}
           </div>
