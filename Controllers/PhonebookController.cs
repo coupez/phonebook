@@ -7,7 +7,7 @@ using phonebook.Services;
 namespace phonebook.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class PhonebookController : ControllerBase
     {
         private readonly IContactService contactService;
