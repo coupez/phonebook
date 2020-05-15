@@ -16,7 +16,7 @@ export default function useContacts(query) {
       return;
     }
 
-    const url = `${endpoint}?q=${query}`;
+    const url = `${endpoint}?query=${encodeURIComponent(query)}`;
     const abortController = new AbortController();
 
     async function fetchUrl() {
