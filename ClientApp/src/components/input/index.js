@@ -5,7 +5,7 @@ import regular from "./peeps/regular.png";
 import thinking from "./peeps/thinking.png";
 import Spinner from "../spinner";
 
-export function Input({ onChange, value, name, autoComplete }) {
+export function Input({ onChange, value, name, autoComplete, ...props }) {
   return (
     <input
       name={name}
@@ -13,6 +13,7 @@ export function Input({ onChange, value, name, autoComplete }) {
       onChange={onChange}
       value={value}
       autoComplete={autoComplete}
+      {...props}
     />
   );
 }
