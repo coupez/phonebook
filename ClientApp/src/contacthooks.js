@@ -61,18 +61,18 @@ export function useContacts(searchQuery) {
 }
 
 export function useSaveContact(id) {
-  const [loading, setLoading] = useState(false);
+  const [saving, setSaving] = useState(false);
   const [errors, setErrors] = useState();
 
   const url = id ? `${endpoint}/${id}` : endpoint;
 
   const save = useCallback(
     async (contactData) => {
-      if (loading) {
+      if (saving) {
         return;
       }
 
-      setLoading(true);
+      setSaving(true);
       setErrors();
 
       const response = await fetch(url, {
@@ -84,7 +84,7 @@ export function useSaveContact(id) {
         body: JSON.stringify(contactData),
       });
 
-      setLoading(false);
+      setSaving(false);
 
       const data = await response.json();
 
@@ -95,12 +95,12 @@ export function useSaveContact(id) {
 
       return true;
     },
-    [loading, url]
+    [saving, url]
   );
 
   return {
     save,
-    loading,
+    saving,
     errors,
   };
 }

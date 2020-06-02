@@ -11,7 +11,9 @@ function App() {
   const [editedContact, setEditedContact] = useState({});
   const [query, setQuery] = useState("");
   const { contacts, loading } = useContacts(query);
-  const { save, errors = {} } = useSaveContact(editedContact.id);
+  const { save, saving, errors = {} } = useSaveContact(
+    editedContact.id
+  );
   const [isAdding, setIsAdding] = useState(false);
   const [notification, setNotification] = useState();
 
@@ -22,8 +24,8 @@ function App() {
   const onSave = useCallback(
     async (contact) => {
       if (await save(contact)) {
-        setNotification("your operation was successful 📙🖋")
-        setIsAdding(false)
+        setNotification("your operation was successful 📙🖋");
+        setIsAdding(false);
         setEditedContact({});
       }
     },
@@ -49,11 +51,11 @@ function App() {
   useEffect(() => {
     if (notification) {
       const t = setTimeout(() => {
-        setNotification()
-      }, 2500)
-      return () => clearTimeout(t)
+        setNotification();
+      }, 2500);
+      return () => clearTimeout(t);
     }
-  }, [notification])
+  }, [notification, setNotification]);
 
   const onCancel = useCallback(() => setIsAdding(false), [setIsAdding]);
 
@@ -67,6 +69,7 @@ function App() {
             <ContactForm
               contact={editedContact}
               save={onSave}
+              saving={saving}
               errors={errors}
               cancel={onCancel}
             />
@@ -84,7 +87,7 @@ function App() {
             </button>
           )}
         </div>
-        
+
         <Notification>{notification}</Notification>
       </div>
     </div>

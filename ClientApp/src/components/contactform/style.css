@@ -7,4 +7,9 @@
     font-size: 1rem;
     font-weight: bold;
     background-color: rgb(var(--color));
+    transition: all 0.2s ease;
+}
+
+.contactform .button:disabled {
+    background-color: rgba(189, 189, 189, 0.5);
 }

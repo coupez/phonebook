@@ -2,7 +2,13 @@ import React, { useCallback, useState } from "react";
 import { Input } from "../input";
 import "./style.css";
 
-export default function ContactForm({ contact, save, errors, cancel }) {
+export default function ContactForm({
+  contact,
+  save,
+  errors,
+  cancel,
+  saving,
+}) {
   const [formData, setFormData] = useState(contact);
 
   const onSubmit = useCallback(
@@ -35,6 +41,7 @@ export default function ContactForm({ contact, save, errors, cancel }) {
       <form onSubmit={onSubmit}>
         <span>First name</span>
         <Input
+          disabled={saving}
           value={formData.firstName || ""}
           name="firstName"
           onChange={onChange}
@@ -42,6 +49,7 @@ export default function ContactForm({ contact, save, errors, cancel }) {
 
         <span>Last name</span>
         <Input
+          disabled={saving}
           value={formData.lastName || ""}
           name="lastName"
           onChange={onChange}
@@ -51,17 +59,18 @@ export default function ContactForm({ contact, save, errors, cancel }) {
         {errors.PhoneNumber &&
           errors.PhoneNumber.map((e) => <span className="error">{e}</span>)}
         <Input
+          disabled={saving}
           value={formData.phoneNumber || ""}
           name="phoneNumber"
           type="tel"
           onChange={onChange}
         />
 
-        <button className="button" type="submit">
+        <button className="button" type="submit" disabled={saving}>
           Save
         </button>
-        <button className="actionbutton" onClick={cancel}>
-          Cancel
+        <button className="actionbutton" onClick={cancel} disabled={saving}>
+          Go back
         </button>
       </form>
     </div>
