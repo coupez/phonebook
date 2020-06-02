@@ -5,13 +5,15 @@ import ContactForm from "./components/contactform";
 import ContactList from "./components/contactlist";
 import "./App.css";
 import "./flex.css";
+import Notification from "./components/notification";
 
 function App() {
   const [editedContact, setEditedContact] = useState({});
-  const [query, setQuery] = useState('');
+  const [query, setQuery] = useState("");
   const { contacts, loading } = useContacts(query);
   const { save, errors = {} } = useSaveContact(editedContact.id);
   const [isAdding, setIsAdding] = useState(false);
+  const [notification, setNotification] = useState();
 
   const onSearchChange = useCallback((e) => setQuery(e.target.value), [
     setQuery,
@@ -20,10 +22,12 @@ function App() {
   const onSave = useCallback(
     async (contact) => {
       if (await save(contact)) {
-        setIsAdding(false);
+        setNotification("your operation was successful 📙🖋")
+        setIsAdding(false)
+        setEditedContact({});
       }
     },
-    [save, setIsAdding]
+    [save, setIsAdding, setNotification]
   );
 
   const onEditContact = useCallback(
@@ -35,12 +39,21 @@ function App() {
   );
 
   useEffect(() => {
-    isAdding && setQuery('');
+    isAdding && setQuery("");
   }, [isAdding]);
 
   useEffect(() => {
     query && setIsAdding(false);
-  }, [query, setIsAdding])
+  }, [query, setIsAdding]);
+
+  useEffect(() => {
+    if (notification) {
+      const t = setTimeout(() => {
+        setNotification()
+      }, 2500)
+      return () => clearTimeout(t)
+    }
+  }, [notification])
 
   const onCancel = useCallback(() => setIsAdding(false), [setIsAdding]);
 
@@ -71,6 +84,8 @@ function App() {
             </button>
           )}
         </div>
+        
+        <Notification>{notification}</Notification>
       </div>
     </div>
   );
