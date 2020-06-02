@@ -1,0 +1,24 @@
+version: '3.1'
+
+services:
+    mongo:
+        image: mongo
+        restart: always
+        environment:
+            MONGO_INITDB_ROOT_USERNAME: demo
+            MONGO_INITDB_ROOT_PASSWORD: demo
+        ports:
+            - 27017:27017
+
+    phonebook:
+        build: .
+        restart: always
+        environment:
+            PhonebookDatabaseSettings__Host: mongo
+            PhonebookDatabaseSettings__User: demo
+            PhonebookDatabaseSettings__Password: demo
+        ports:
+            - 5000:80
+        depends_on:
+            - mongo
+            
