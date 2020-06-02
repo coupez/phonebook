@@ -15,9 +15,16 @@ export default function ContactForm({ contact, save, errors, cancel }) {
 
   const onChange = useCallback(
     (e) => {
+      let value = e.target.value;
+
+      console.log(e.target.type);
+      if (e.target.type === "tel") {
+        value = value.replace(/[^0-9+ ]/g, "");
+      }
+
       setFormData({
         ...formData,
-        [e.target.name]: e.target.value.trim(),
+        [e.target.name]: value,
       });
     },
     [formData, setFormData]
@@ -46,6 +53,7 @@ export default function ContactForm({ contact, save, errors, cancel }) {
         <Input
           value={formData.phoneNumber || ""}
           name="phoneNumber"
+          type="tel"
           onChange={onChange}
         />
 
