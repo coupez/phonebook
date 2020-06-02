@@ -8,7 +8,7 @@ import "./flex.css";
 
 function App() {
   const [editedContact, setEditedContact] = useState({});
-  const [query, setQuery] = useState();
+  const [query, setQuery] = useState('');
   const { contacts, loading } = useContacts(query);
   const { save, errors = {} } = useSaveContact(editedContact.id);
   const [isAdding, setIsAdding] = useState(false);
@@ -35,7 +35,7 @@ function App() {
   );
 
   useEffect(() => {
-    isAdding && setQuery();
+    isAdding && setQuery('');
   }, [isAdding]);
 
   useEffect(() => {

@@ -27,15 +27,27 @@ export default function ContactForm({ contact, save, errors, cancel }) {
     <div className="contactform flex column">
       <form onSubmit={onSubmit}>
         <span>First name</span>
-        <Input name="firstName" onChange={onChange} />
+        <Input
+          value={formData.firstName || ""}
+          name="firstName"
+          onChange={onChange}
+        />
 
         <span>Last name</span>
-        <Input name="lastName" onChange={onChange} />
+        <Input
+          value={formData.lastName || ""}
+          name="lastName"
+          onChange={onChange}
+        />
 
         <span>Phone number</span>
         {errors.PhoneNumber &&
           errors.PhoneNumber.map((e) => <span className="error">{e}</span>)}
-        <Input name="phoneNumber" onChange={onChange} />
+        <Input
+          value={formData.phoneNumber || ""}
+          name="phoneNumber"
+          onChange={onChange}
+        />
 
         <button className="button" type="submit">
           Save

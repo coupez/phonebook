@@ -25,5 +25,10 @@ namespace phonebook.Controllers
         public ActionResult<Contact> Create(ContactDTO contact) {
             return contactService.Add(contact.ToContact());
         }
+
+        [HttpPost("{id}")]
+        public ActionResult<Contact> Update(string id, ContactDTO contact) {
+            return contactService.Update(contact.ToContact());
+        }
     }
 }
