@@ -8,7 +8,6 @@ export default function ContactForm({ contact, save, errors, cancel }) {
   const onSubmit = useCallback(
     (e) => {
       e.preventDefault();
-      console.log(formData);
       save(formData);
     },
     [save, formData]

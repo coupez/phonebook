@@ -87,7 +87,6 @@ export function useSaveContact(id) {
       setLoading(false);
 
       const data = await response.json();
-      console.log("contact", data);
 
       if (!response.ok && data.errors) {
         setErrors(data.errors);

@@ -44,7 +44,6 @@ function App() {
 
   const onCancel = useCallback(() => setIsAdding(false), [setIsAdding]);
 
-  console.log("loading:", loading);
   return (
     <div className="App">
       <div className="container">
